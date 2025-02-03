@@ -1,0 +1,29 @@
+.glass-container {
+  background: rgba(25, 25, 65, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.neon-text {
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff,
+               0 0 20px #0ff,
+               0 0 30px #0ff;
+}
+
+.holographic-button {
+  background: linear-gradient(45deg, #0ff, #f0f);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.holographic-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff;
+}
