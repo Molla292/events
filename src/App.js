@@ -30,14 +30,19 @@ const CanvasContainer = styled.div`
   z-index: 0;
 `;
 
-function App() {
-    const [events, setEvents] = useState([]);
 
-    // Fetch events from the backend
+function App() {
+    // In the parent component (likely App.js)
+    const [events, setEvents] = useState([]); // Initialize with empty array
+
     useEffect(() => {
-        axios.get('/api/events')
-            .then((response) => setEvents(response.data))
-            .catch((err) => console.error('Error fetching events:', err));
+        axios.get(`${process.env.REACT_APP_API_URL}/api/events`)
+            .then(response => {
+                if (Array.isArray(response.data)) {
+                    setEvents(response.data);
+                }
+            })
+            .catch(error => console.error('Error fetching events:', error));
     }, []);
 
     return (
