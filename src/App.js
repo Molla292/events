@@ -1,9 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import axios from 'axios';
+import AuthRoute from './components/AuthRoute';
+import Dashboard from './pages/Dashboard';
 
 // Components
 import Navbar from './components/Navbar';
@@ -60,11 +63,13 @@ function App() {
 
                 {/* Routes */}
                 <Routes>
-                    <Route path="/" element={<Home events={events} />} />
-                    <Route path="/event/:id" element={<EventDetails />} />
-                    <Route path="/create-event" element={<CreateEvent />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/dashboard" element={
+                        <AuthRoute>
+                            <Dashboard />
+                        </AuthRoute>
+                    } />
                 </Routes>
             </AppContainer>
         </Router>

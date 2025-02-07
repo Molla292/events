@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState } from 'react';
+
 
 const Nav = styled.nav`
   position: relative;
@@ -23,17 +25,30 @@ const NavLink = styled(Link)`
   }
 `;
 
-function Navbar() {
-  return (
-    <Nav>
-      <NavLink to="/">FutureEvents</NavLink>
-      <div>
-        <NavLink to="/create-event">Create Event</NavLink>
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/register">Register</NavLink>
-      </div>
-    </Nav>
-  );
-}
+const Navbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        window.location.href = '/login';
+    };
+
+    return (
+        <Nav>
+            <NavLink to="/">FutureEvents</NavLink>
+            <div>
+                {isLoggedIn ? (
+                    <NavLink to="#" onClick={handleLogout}>Logout</NavLink>
+                ) : (
+                    <>
+                        <NavLink to="/register">Register</NavLink>
+                        <NavLink to="/login">Login</NavLink>
+                    </>
+                )}
+            </div>
+        </Nav>
+    );
+};
 
 export default Navbar;
